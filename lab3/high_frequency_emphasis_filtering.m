@@ -1,0 +1,21 @@
+clear all;
+close all;
+
+f = imread('Fig0419(a)(chestXray_original).tif');
+PQ = paddedsize(size(f));
+D0 = 0.05*PQ(1);
+HBW = hpfilter('btw', PQ(1), PQ(2), D0, 2);
+H = 0.5 + 2*HBW;
+gbw = dftfilt( double(f), HBW);
+gbw = gscale(gbw);
+gbf = dftfilt(double(f), H);
+gbf = gscale(gbf);
+subplot(221); imshow(f, []);
+title('original bone image');
+subplot(222); imshow(gbw, []);
+title('high-pass filtering image');
+subplot(223); imshow(gbf, []);
+title('high-frequncy emphasis image');
+ghe = histeq(gbf, 256);
+subplot(224); imshow(ghe);
+title('histogram equalized image');
