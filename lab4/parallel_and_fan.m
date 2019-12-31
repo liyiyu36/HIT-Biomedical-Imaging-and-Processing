@@ -1,6 +1,20 @@
 clear all;
 close all;
 
+P = phantom(512);
+
+theta1 = 0:10:170;
+[R1,xp] = radon(P,theta1);
+num_angles_R1 = size(R1,2);			% 不同的旋转步进角度
+
+theta2 = 0:5:175;
+[R2,xp] = radon(P,theta2);
+num_angles_R2 = size(R2,2);			% 不同的旋转步进角度
+
+theta3 = 0:2:178;
+[R3,xp] = radon(P,theta3);
+num_angles_R3 = size(R3,2);			% 不同的旋转步进角度
+
 % Constrain the output size of each reconstruction to be the same as the
 % size of the original image, |P|.
 output_size = max(size(P));
